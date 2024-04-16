@@ -1,49 +1,62 @@
-pipeline{
+pipeline {
     agent any
-    environment{
-        DIRECTORY_PATH ="/Users/chanshutkeung/Documents/Deakin - Data Sicence/2024T1/SIT753 Professional Practice in Information Technology/Week 5/Jenkinsfile"
-        TESTING_ENVIRONMENT = "test_envir"
-        PRODUCTION_ENVIRONMENT = "Stanley"
-    }
-    stages{
-        stage('Build'){
-            steps{
-                echo "fetch the source code from the directory path specified by the environment variable"
-                echo "compile the code and generate any necessary artifacts"
+    stages {
+        stage('Build') {
+            steps {
+                echo "Building the code using Maven"
+            }
+        }
+        stage('Unit and Integration Tests') {
+            steps {
+                echo "Running unit tests using JUnit and integration tests using Selenium"
             }
             post{
                 success {
                     mail to: "chanshut@gmail.com",
-                    subject: "Build Status Email",
-                    body: "Build was successful!"
+                    subject: "Unit and Integration Tests Status",
+                    body: "Unit and Integration Tests were successful!"
+                }
+                Fail {
+                    mail to: "chanshut@gmail.com"
+                    subject: "Unit and Integration Tests Status"
+                    body: "Unit and Integration Tests were failed :("
                 }
             }
-        }
-        stage('Test'){
-            steps{
-                echo "unit tests" 
-                echo "integration tests"
+        stage('Code Analysis') {
+            steps {
+                echo "Analyzing the code using SonarQube"
             }
         }
-        stage('Code Quality Check'){
-            steps{
-                echo "check the quality of the code"
+        stage('Security Scan') {
+            steps {
+                echo "Performing security scan using OWASP ZAP"
+            }
+            post{
+                success {
+                    mail to: "chanshut@gmail.com",
+                    subject: "Unit and Integration Tests Status",
+                    body: "Unit and Integration Tests were successful!"
+                }
+                Fail {
+                    mail to: "chanshut@gmail.com"
+                    subject: "Unit and Integration Tests Status"
+                    body: "Unit and Integration Tests were failed :("
+                }
+            }
+        stage('Deploy to Staging') {
+            steps {
+                echo "Deploying the application to the staging server (AmazonEC2)"
             }
         }
-        stage('Deploy'){
-            steps{
-                echo "deploy the application to a testing environment specified by the environment variable"
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "Running integration tests on the staging environment"
             }
         }
-        stage('Approval'){
-            steps{
-                 sleep(10)
+        stage('Deploy to Production') {
+            steps {
+                echo "Deploying the application to the production server (AmazonEC2)"
             }
         }
-        stage('Deploy to Production'){
-            steps{
-                echo "$PRODUCTION_ENVIRONMENT, deployment is done"
-            }
-        }                
     }
 }
