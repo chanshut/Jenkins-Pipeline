@@ -12,18 +12,19 @@ pipeline {
             }
             post{
                 success {
-                    mail to: "chanshut@gmail.com",
+                    emailext (to: "chanshut@gmail.com",
                     subject: "Unit and Integration Tests Status",
                     body: "Unit and Integration Tests were successful!"
-                    attachmentsPattern: '**/*.log'
+                    attachLog: true)
                 }
                 failure {
-                    mail to: "chanshut@gmail.com"
+                    emailext (to: "chanshut@gmail.com"
                     subject: "Unit and Integration Tests Status"
                     body: "Unit and Integration Tests were failed :("
-                    attachmentsPattern: '**/*.log'
+                    attachLog: true)
                 }
             }
+        }
         stage('Code Analysis') {
             steps {
                 echo "Analyzing the code using SonarQube"
@@ -35,18 +36,19 @@ pipeline {
             }
             post{
                 success {
-                    mail to: "chanshut@gmail.com",
-                    subject: "Unit and Integration Tests Status",
-                    body: "Unit and Integration Tests were successful!"
-                    attachmentsPattern: '**/*.log'
+                    emailext (to: "chanshut@gmail.com",
+                    subject: "Security Scan Status",
+                    body: "Security Scan Status was successful!"
+                    attachLog: true)
                 }
                 failure {
-                    mail to: "chanshut@gmail.com"
-                    subject: "Unit and Integration Tests Status"
-                    body: "Unit and Integration Tests were failed :("
-                    attachmentsPattern: '**/*.log'
+                    emailext (to: "chanshut@gmail.com"
+                    subject: "Security Scan Status"
+                    body: "Security Scan was failed :("
+                    attachLog: ture)
                 }
             }
+        }
         stage('Deploy to Staging') {
             steps {
                 echo "Deploying the application to the staging server (AmazonEC2)"
