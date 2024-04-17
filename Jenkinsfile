@@ -15,11 +15,13 @@ pipeline {
                     mail to: "chanshut@gmail.com",
                     subject: "Unit and Integration Tests Status",
                     body: "Unit and Integration Tests were successful!"
+                    attachmentsPattern: '**/*.log'
                 }
-                Fail {
+                failure {
                     mail to: "chanshut@gmail.com"
                     subject: "Unit and Integration Tests Status"
                     body: "Unit and Integration Tests were failed :("
+                    attachmentsPattern: '**/*.log'
                 }
             }
         stage('Code Analysis') {
@@ -36,11 +38,13 @@ pipeline {
                     mail to: "chanshut@gmail.com",
                     subject: "Unit and Integration Tests Status",
                     body: "Unit and Integration Tests were successful!"
+                    attachmentsPattern: '**/*.log'
                 }
-                Fail {
+                failure {
                     mail to: "chanshut@gmail.com"
                     subject: "Unit and Integration Tests Status"
                     body: "Unit and Integration Tests were failed :("
+                    attachmentsPattern: '**/*.log'
                 }
             }
         stage('Deploy to Staging') {
