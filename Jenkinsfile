@@ -14,13 +14,13 @@ pipeline {
                 success {
                     emailext (to: "chanshut@gmail.com",
                     subject: "Unit and Integration Tests Status",
-                    body: "Unit and Integration Tests were successful!"
+                    body: "Unit and Integration Tests were successful!",
                     attachLog: true)
                 }
                 failure {
                     emailext (to: "chanshut@gmail.com"
                     subject: "Unit and Integration Tests Status"
-                    body: "Unit and Integration Tests were failed :("
+                    body: "Unit and Integration Tests were failed :(",
                     attachLog: true)
                 }
             }
@@ -38,13 +38,13 @@ pipeline {
                 success {
                     emailext (to: "chanshut@gmail.com",
                     subject: "Security Scan Status",
-                    body: "Security Scan Status was successful!"
+                    body: "Security Scan Status was successful!",
                     attachLog: true)
                 }
                 failure {
                     emailext (to: "chanshut@gmail.com"
                     subject: "Security Scan Status"
-                    body: "Security Scan was failed :("
+                    body: "Security Scan was failed :(",
                     attachLog: ture)
                 }
             }
