@@ -18,8 +18,8 @@ pipeline {
                     attachLog: true)
                 }
                 failure {
-                    emailext (to: "chanshut@gmail.com"
-                    subject: "Unit and Integration Tests Status"
+                    emailext (to: "chanshut@gmail.com",
+                    subject: "Unit and Integration Tests Status",
                     body: "Unit and Integration Tests were failed :(",
                     attachLog: true)
                 }
@@ -42,8 +42,8 @@ pipeline {
                     attachLog: true)
                 }
                 failure {
-                    emailext (to: "chanshut@gmail.com"
-                    subject: "Security Scan Status"
+                    emailext (to: "chanshut@gmail.com",
+                    subject: "Security Scan Status",
                     body: "Security Scan was failed :(",
                     attachLog: ture)
                 }
